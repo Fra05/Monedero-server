@@ -1,30 +1,27 @@
 const { Schema, model } = require('mongoose');
 
-const UserSchema = Schema({
-    first_name: {
+const ItemsSchema = Schema({
+    fecha: {
         type: String,
-        required: true
+        required: false
     },
-    email: {
+    nombre: {
         type: String,
         required: true,
         unique: true
     },
-    password: {
-        type: String,
+    precio: {
+        type: Number,
         required: true
     },
 
-    online: {
-        type: Boolean,
-        default: false
-    }
+
 });
 
-UserSchema.method('toJSON', function() {
+ItemsSchema.method('toJSON', function() {
     const { __v, _id, password, ...object } = this.toObject();
     object.uid = _id;
     return object;
 })
 
-module.exports = model('User', UserSchema);
+module.exports = model('User', ItemsSchema);
